@@ -15,6 +15,7 @@ jobs:
           GITHUB_TOKEN: "${secrets.REMOTE_GITHUB_TOKEN}"
           GH_REPO: "tjololo/az-static-webapp"
         run: |
+          gh auth login
           echo "Checkout $GH_REPO"
           gh repo clone $GH_REPO
           cd $(GH_REPO)
