@@ -32,6 +32,6 @@ jobs:
           git add .
           git commit -m "Update based on $GITHUB_SHA"
           git push
-          gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -B "main" -b -R $GH_ORG/$GH_REPO
+          gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -B "main" -R $GH_ORG/$GH_REPO
           rm -f ../token.txt
 
