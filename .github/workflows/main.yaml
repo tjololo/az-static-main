@@ -17,13 +17,17 @@ jobs:
           GH_REPO: "az-static-webapp"
         run: |
           #gh auth login
-          echo "Checkout $GH_REPO"
+          AUTHOR_FULL=$(git log -1 | grep Author)
+          AUTHOR_NAME=$(git log -1 | grep Author | cut -d' ' -f2)
+          AUTHOR_EMAIL=$(git log -1 | grep Author | cut -d' ' -f3 | cut -d'<' -f2 | cut -d'>' -f1)
           gh repo clone $GH_ORG/$GH_REPO
           cd $GH_REPO
           git checkout preview
           git pull
           cp ../html/index.html .
           cp ../img/* ./img/
+          git config user.email "$AUTHOR_EMAIL"
+          git config user.name "$AUTHOR_NAME"
           git add .
           git commit -m "Update based on $GITHUB_SHA"
           git push origin preview
