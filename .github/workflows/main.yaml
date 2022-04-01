@@ -12,10 +12,11 @@ jobs:
         uses: actions/checkout@v2
       - name: check gh
         env:
-          GITHUB_TOKEN: "${secrets.REMOTE_GITHUB_TOKEN}"
+          REMOTE_TOKEN: "${secrets.REMOTE_GITHUB_TOKEN}"
           GH_REPO: "tjololo/az-static-webapp"
         run: |
-          gh auth login
+          cat $REMOTE_TOKEN > token.txt
+          gh auth login --with-token < token.txt
           echo "Checkout $GH_REPO"
           gh repo clone $GH_REPO
           cd $(GH_REPO)
@@ -24,7 +25,8 @@ jobs:
           cp ../html/index.html .
           cp ../img/* ./img/
           git add .
-          git commit -m "Update based on $(GITHUB_SHA)"
+          git commit -m "Update based on $GITHUB_SHA"
           git push origin preview
-          gh pr create -t "Update based on $(GITHUB_SHA)" -b "Update based on $(GITHUB_SHA)" -b "main"
+          gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -b "main"
+          rm -f token.txt
 
