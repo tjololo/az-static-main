@@ -1,0 +1,14 @@
+name: ci
+on:
+  push:
+    branches: main
+
+jobs:
+  build:
+    name: ""
+    runs-on: ubuntu-latest
+    steps:
+      - name: ":hammer_and_wrench:"
+        uses: actions/checkout@v2
+      - name: check gh
+        run: gh --version
