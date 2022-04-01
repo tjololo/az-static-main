@@ -11,4 +11,20 @@ jobs:
       - name: ":hammer_and_wrench:"
         uses: actions/checkout@v2
       - name: check gh
-        run: gh --version
+        env:
+          GITHUB_TOKEN: "${secrets.REMOTE_GITHUB_TOKEN}"
+          GH_TOKEN: "${secrets.REMOTE_GITHUB_TOKEN}"
+          GH_REPO: "tjololo/az-static-webapp"
+        run: |
+          gh login
+          gh clone github.com/$(GH_REPO)
+          cd $(GH_REPO)
+          git checkout preview
+          git pull
+          cp ../html/index.html .
+          cp ../img/* ./img/
+          git add .
+          git commit -m "Update based on $(GITHUB_SHA)"
+          git push origin preview
+          gh pr create -t "Update based on $(GITHUB_SHA)" -b "Update based on $(GITHUB_SHA)" -b "main"
+
