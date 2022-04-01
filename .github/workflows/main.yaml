@@ -28,7 +28,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git add .
           git commit -m "Update based on $GITHUB_SHA"
-          git push origin preview
+          #git push origin preview
           gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -b "main"
           rm -f token.txt
 
