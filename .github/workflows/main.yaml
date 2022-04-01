@@ -18,7 +18,7 @@ jobs:
           GH_ORG: "tjololo"
           GH_REPO: "az-static-webapp"
         run: |
-          cat $REMOTE_TOKEN > token.txt
+          echo $REMOTE_TOKEN > token.txt
           gh auth login --with-token < token.txt
           gh repo clone $GH_ORG/$GH_REPO
           cd $GH_REPO
