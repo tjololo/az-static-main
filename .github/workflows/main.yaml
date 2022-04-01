@@ -14,11 +14,12 @@ jobs:
           path: source
       - name: check gh
         env:
-          GITHUB_TOKEN: ${{ secrets.REMOTE_GITHUB_TOKEN }}
+          REMOTE_TOKEN: ${{ secrets.REMOTE_GITHUB_TOKEN }}
           GH_ORG: "tjololo"
           GH_REPO: "az-static-webapp"
         run: |
-          #gh auth login
+          cat $REMOTE_TOKEN > token.txt
+          gh auth login --with-token < token.txt
           gh repo clone $GH_ORG/$GH_REPO
           cd $GH_REPO
           git checkout preview
@@ -31,5 +32,5 @@ jobs:
           git commit -m "Update based on $GITHUB_SHA"
           git push
           gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -b "main"
-          rm -f token.txt
+          rm -f ../token.txt
 
