@@ -24,6 +24,8 @@ jobs:
           cd $GH_REPO
           git checkout preview
           git pull
+          mkdir -p img
+          mkdir -p js
           cp ../source/html/* .
           cp ../source/img/* ./img/
           cp ../source/js/* ./js/
