@@ -18,8 +18,8 @@ jobs:
           GH_ORG: "tjololo"
           GH_REPO: "az-static-webapp"
         run: |
-          #echo $REMOTE_TOKEN > token.txt
-          #gh auth login --with-token < token.txt
+          echo $REMOTE_TOKEN > token.txt
+          gh auth login --with-token < token.txt
           gh repo clone $GH_ORG/$GH_REPO
           cd $GH_REPO
           git checkout preview
@@ -33,5 +33,5 @@ jobs:
           git commit -m "Update based on $GITHUB_SHA"
           git push
           URL=$(gh pr create -t "Update based on $GITHUB_SHA" -b "Update based on $GITHUB_SHA" -B "main" -R $GH_ORG/$GH_REPO)
-          #rm -f ../token.txt
+          rm -f ../token.txt
 
