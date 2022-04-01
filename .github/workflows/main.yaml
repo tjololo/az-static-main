@@ -18,7 +18,7 @@ jobs:
           #gh auth login
           echo "Checkout $GH_REPO"
           gh repo clone $GH_REPO
-          cd $(GH_REPO)
+          cd $GH_REPO
           git checkout preview
           git pull
           cp ../html/index.html .
