@@ -29,6 +29,7 @@ jobs:
           cp ../source/html/* .
           cp ../source/img/* ./img/
           cp ../source/js/* ./js/
+          cp ../source/config/staticwebapp.config.json ./staticwebapp.config.json
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
           git remote set-url origin https://${REMOTE_TOKEN}:x-oauth-basic@github.com/${GH_ORG}/${GH_REPO}.git
