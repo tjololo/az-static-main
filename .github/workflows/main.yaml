@@ -30,8 +30,6 @@ jobs:
           cp ../source/html/* .
           cp ../source/img/* ./img/
           cp ../source/js/* ./js/
-          rm -f ./js/main.js
-          ln -s ./js/test.js ./js/main.js
           cp ../source/css/* ./css/
           cp ../source/config/staticwebapp.config.json ./staticwebapp.config.json
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
